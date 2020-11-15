@@ -26,6 +26,10 @@ function Vector2.zero()
     return Vector2(0, 0)
 end
 
+function Vector2.one()
+    return Vector2(1, 1)
+end
+
 function Vector2.up()
     return Vector2(0, 1)
 end
