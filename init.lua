@@ -8,11 +8,12 @@
 --- Helper Lua file for easy require if math.lua is used as a git submodule or
 --- folder. Not needed in many cases, including luarocks distribution.
 
-local args = { ... }
+local args = {...}
 local directory = args[1]
 
 local math = {
-    Vector2 = require(directory .. '.tiny')
+    MathEx = require(directory .. ".mathex"),
+    Vector2 = require(directory .. ".vector2")
 }
 
 return math
