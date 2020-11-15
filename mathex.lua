@@ -35,4 +35,10 @@ function MathEx.radian2angle(radian)
     return radian / math.pi * 180
 end
 
+---@param value number
+---@return number
+function MathEx.sign(value)
+    return value > 0 and 1 or (value < 0 and -1 or 0)
+end
+
 return MathEx
