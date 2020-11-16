@@ -57,6 +57,24 @@ function test:create_left()
     assertEqual(v.y, 0)
 end
 
+function test:fromAgnle()
+    local v = Vector2.fromAngle(0)
+    assertTrue(v.x < 0.000000001)
+    assertTrue(v.y - 1 < 0.000000001)
+
+    v = Vector2.fromAngle(90)
+    assertTrue(v.x + 1 < 0.000000001)
+    assertTrue(v.y < 0.000000001)
+
+    v = Vector2.fromAngle(180)
+    assertTrue(v.x < 0.000000001)
+    assertTrue(v.y + 1 < 0.000000001)
+
+    v = Vector2.fromAngle(270)
+    assertTrue(v.x - 1 < 0.000000001)
+    assertTrue(v.y < 0.000000001)
+end
+
 function test:to_string()
     local v = Vector2(2, 3)
     assertEqual(tostring(v), "Vector2(2, 3)")
@@ -147,6 +165,20 @@ function test:clone()
     assertNotNil(v2)
     assertEqual(v2.x, 3)
     assertEqual(v2.y, 4)
+end
+
+function test:toAngle()
+    local angle = Vector2(0, 0):toAngle()
+    assertTrue(angle < 0.000000001)
+
+    angle = Vector2(-1, 0):toAngle()
+    assertTrue(angle - 90 < 0.000000001)
+
+    angle = Vector2(0, -1):toAngle()
+    assertTrue(angle - 180 < 0.000000001)
+
+    angle = Vector2(1, 0):toAngle()
+    assertTrue(angle - 270 < 0.000000001)
 end
 
 test()
