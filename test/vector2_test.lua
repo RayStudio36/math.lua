@@ -181,4 +181,42 @@ function test:toAngle()
     assertTrue(angle - 270 < 0.000000001)
 end
 
+function test:rotate()
+    local v = Vector2(1, 0)
+    local v1 = v:rotate(90)
+    assertTrue(v1.x - 0 < 0.000000001)
+    assertTrue(v1.y - 1 < 0.000000001)
+
+    v1 = v:rotate(180)
+    assertTrue(v1.x - -1 < 0.000000001)
+    assertTrue(v1.y - 0 < 0.000000001)
+
+    v1 = v:rotate(270)
+    assertTrue(v1.x - 0 < 0.000000001)
+    assertTrue(v1.y - -1 < 0.000000001)
+
+    v1 = v:rotate(360)
+    assertTrue(v1.x - 1 < 0.000000001)
+    assertTrue(v1.y - 0 < 0.000000001)
+end
+
+function test:rotated()
+    local v = Vector2(1, 0)
+    v:rotated(90)
+    assertTrue(v.x - 0 < 0.000000001)
+    assertTrue(v.y - 1 < 0.000000001)
+
+    v:rotated(90)
+    assertTrue(v.x - -1 < 0.000000001)
+    assertTrue(v.y - 0 < 0.000000001)
+
+    v:rotated(90)
+    assertTrue(v.x - 0 < 0.000000001)
+    assertTrue(v.y - -1 < 0.000000001)
+
+    v:rotated(90)
+    assertTrue(v.x - 1 < 0.000000001)
+    assertTrue(v.y - 0 < 0.000000001)
+end
+
 test()

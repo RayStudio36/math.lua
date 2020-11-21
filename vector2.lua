@@ -11,15 +11,15 @@ local Vector2 = {}
 Vector2.__index = Vector2
 
 setmetatable(
-        Vector2,
-        {
-            __call = function(class, ...)
-                local instance = {}
-                setmetatable(instance, Vector2)
-                instance:new(...)
-                return instance
-            end
-        }
+    Vector2,
+    {
+        __call = function(class, ...)
+            local instance = {}
+            setmetatable(instance, Vector2)
+            instance:new(...)
+            return instance
+        end
+    }
 )
 
 ---@return Vector2
@@ -55,7 +55,7 @@ end
 ---@param angle number
 ---@return Vector2
 function Vector2.fromAngle(angle)
-    local a = math.rad(angle + 90);
+    local a = math.rad(angle + 90)
     return Vector2(math.cos(a), math.sin(a))
 end
 
@@ -65,16 +65,10 @@ function Vector2:new(x, y)
 end
 
 function Vector2:__tostring()
-    local x = math.floor(self.x) == self.x
-            and string.format("%d", self.x)
-            or string.format("%f", self.x)
-    local y = math.floor(self.y) == self.y
-            and string.format("%d", self.y)
-            or string.format("%f", self.y)
+    local x = math.floor(self.x) == self.x and string.format("%d", self.x) or string.format("%f", self.x)
+    local y = math.floor(self.y) == self.y and string.format("%d", self.y) or string.format("%f", self.y)
 
-    return string.format("Vector2(%s, %s)",
-            x,
-            y)
+    return string.format("Vector2(%s, %s)", x, y)
 end
 
 function Vector2:__eq(other)
@@ -136,6 +130,30 @@ end
 ---@return number
 function Vector2:toAngle()
     return math.deg(math.atan(self.y, self.x)) - 90
+end
+
+---@param angle number
+---@return Vector2
+function Vector2:rotate(angle)
+    local sin = math.sin(math.rad(angle))
+    local cos = math.cos(math.rad(angle))
+
+    local tx = self.x
+    local ty = self.y
+    local x = (cos * tx) - (sin * ty)
+    local y = (sin * tx) + (cos * ty)
+    return Vector2(x, y)
+end
+
+---@param angle number
+function Vector2:rotated(angle)
+    local sin = math.sin(math.rad(angle))
+    local cos = math.cos(math.rad(angle))
+
+    local tx = self.x
+    local ty = self.y
+    self.x = (cos * tx) - (sin * ty)
+    self.y = (sin * tx) + (cos * ty)
 end
 
 return Vector2
